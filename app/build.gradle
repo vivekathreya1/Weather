@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.vivek.weather"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", apikeyProperties['API_KEY'])
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation group: 'com.google.android.material', name: 'material', version: '1.2.0-alpha04'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+
+    //Architecture components
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment:$rootProject.navVersion"
+    implementation "androidx.navigation:navigation-ui:$rootProject.navVersion"
+    implementation "androidx.navigation:navigation-runtime:$rootProject.navVersion"
+
+    // Recyclerview
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recViewVersion"
+    implementation "androidx.cardview:cardview:$rootProject.cardVersion"
+
+
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+
+    // Gson
+    implementation "com.google.code.gson:gson:$rootProject.gson_version"
+
+
+    // Material
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+
+    // Testing
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidx_test"
+    androidTestImplementation "androidx.test:runner:$rootProject.androidx_test"
+    androidTestImplementation "androidx.test:core:$rootProject.androidx_test"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidx_test_espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.androidx_test_espresso"
+    implementation "androidx.test.espresso:espresso-idling-resource:$rootProject.androidx_test_espresso"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // Permissions
+    implementation 'pub.devrel:easypermissions:1.2.0'
+
+    //Location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+}
