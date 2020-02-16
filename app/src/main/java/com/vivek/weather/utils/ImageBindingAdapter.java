@@ -6,13 +6,15 @@ import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 
-public class BindingAdapters {
+public class ImageBindingAdapter {
+
+
 
     @BindingAdapter("weatherIcon")
     public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl)
+        Glide.with(view).load(imageUrl)
                 .into(view);
+
 
     }
 }

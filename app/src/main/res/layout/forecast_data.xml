@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="forecastWeather"
+            type="com.vivek.weather.ui.main.model.ForecastWeather" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+   >
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{forecastWeather.dateTime}"
+            app:layout_constraintEnd_toStartOf="@+id/minTempTv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            android:textSize="10sp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/minTempTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:gravity="end"
+            android:text="@{@string/min(forecastWeather.temperatureMin)}"
+            app:layout_constraintEnd_toStartOf="@+id/maxTempTv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toEndOf="@+id/date"
+            app:layout_constraintTop_toTopOf="@id/date" />
+
+        <TextView
+            android:id="@+id/maxTempTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/max(forecastWeather.temperatureMax)}"
+            android:textSize="10sp"
+            android:gravity="end"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toEndOf="@+id/minTempTv"
+            app:layout_constraintTop_toTopOf="@id/date" />
+
+        <TextView
+            android:id="@+id/dayNameTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{forecastWeather.dayOfWeek}"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/date"
+            app:layout_constraintTop_toBottomOf="@+id/date"
+            app:layout_constraintEnd_toEndOf="@id/date"/>
+
+        <TextView
+            android:id="@+id/tempTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{forecastWeather.temperature.concat(@string/space).concat(@string/celcius).concat(`C`)}"
+            android:textSize="18sp"
+            android:gravity="end"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/dayNameTv"
+            app:layout_constraintStart_toStartOf="@+id/minTempTv"
+            app:layout_constraintEnd_toEndOf="@+id/minTempTv"/>
+
+
+        <ImageView
+            android:id="@+id/descriptionIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            weatherIcon="@{forecastWeather.iconUrl}"
+            app:layout_constraintTop_toTopOf="@+id/dayNameTv"
+            app:layout_constraintStart_toStartOf="@id/maxTempTv"
+            app:layout_constraintEnd_toEndOf="@id/maxTempTv"
+            app:layout_constraintBottom_toBottomOf="@id/dayNameTv"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

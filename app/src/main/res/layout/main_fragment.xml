@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.vivek.weather.ui.main.MainViewModel" />
+            type="com.vivek.weather.ui.main.viewmodel.MainViewModel" />
     </data>
 
 
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
-            android:text="@{viewModel.currentWeatherLiveData.temperatureMin.concat(@string/space).concat(@string/celcius).concat(`C`)}"
+            android:text="@{@string/min(viewModel.currentWeatherLiveData.temperatureMin)}"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             app:layout_constraintEnd_toStartOf="@+id/currentTempMax"
@@ -93,7 +93,7 @@
             android:id="@+id/currentTempMax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.currentWeatherLiveData.temperatureMax.concat(@string/space).concat(@string/celcius).concat(`C`)}"
+            android:text="@{@string/max(viewModel.currentWeatherLiveData.temperatureMax)}"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@id/currentTempMin"
@@ -131,13 +131,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="24sp"
             android:background="@android:color/transparent"
             android:text="@string/retry"
             android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/centerGuideline" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/bottomPanel"
+            layout="@layout/forecast_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"></include>
+
+        <ImageView
+            android:src="@drawable/slideup"
+            android:id="@+id/slideUpArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:src="@drawable/slide_down"
+            android:id="@+id/slideUpDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

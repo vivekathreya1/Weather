@@ -1,6 +1,7 @@
 package com.vivek.weather.di.main;
 
 import com.vivek.weather.api.WeatherApiServiceInterface;
+import com.vivek.weather.ui.main.ForecastAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,4 +16,11 @@ public class MainModule {
     static WeatherApiServiceInterface provideRetrofit(Retrofit retrofit){
         return retrofit.create(WeatherApiServiceInterface.class);
     }
+
+    @MainScope
+    @Provides
+    static ForecastAdapter provideAdapter(){
+        return new ForecastAdapter();
+    }
+
 }

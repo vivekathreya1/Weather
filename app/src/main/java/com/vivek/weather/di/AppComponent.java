@@ -17,6 +17,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 })
 public interface AppComponent extends AndroidInjector<WeatherApplication> {
 
+
     @Component.Builder
     interface Builder {
         @BindsInstance

@@ -3,7 +3,7 @@ package com.vivek.weather.di.main;
 import androidx.lifecycle.ViewModel;
 
 import com.vivek.weather.di.ViewModelKey;
-import com.vivek.weather.ui.main.MainViewModel;
+import com.vivek.weather.ui.main.viewmodel.MainViewModel;
 
 import dagger.Binds;
 import dagger.Module;

@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "Weather">]>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources
+    [<!ENTITY appname "Weather">]>
 <resources>
     <string name="app_name">&appname;</string>
     <string name="no_internet">No internet connection. Please check your network connection and try again.</string>
     <string name="unknown_error">Unknown error occured. Please try again later.</string>
     <string name="space">\u0020</string>
     <string name="celcius">\u00B0</string>
-    <string name="min">Min:</string>
-    <string name="max">Max:</string>
+    <string name="min">Min: %s\u00B0 C </string>
+    <string name="max">Max: %s\u00B0 C</string>
     <string name="retry">Retry</string>
     <string name="latlongError">An error ocurred while fetching the location</string>
     <string name="apikeyError">Invalid key</string>

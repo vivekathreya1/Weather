@@ -1,4 +1,4 @@
-package com.vivek.weather.model;
+package com.vivek.weather.ui.main.model;
 
 import javax.inject.Inject;
 
