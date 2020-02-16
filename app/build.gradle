@@ -93,7 +93,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Permissions
-    implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation 'com.karumi:dexter:6.0.2'
 
     //Location
     implementation 'com.github.mumayank:AirLocation:1.3'

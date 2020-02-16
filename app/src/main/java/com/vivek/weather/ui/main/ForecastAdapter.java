@@ -1,7 +1,6 @@
 package com.vivek.weather.ui.main;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vivek.weather.R;
 import com.vivek.weather.databinding.ForecastDataBinding;
-import com.vivek.weather.ui.main.model.CurrentWeather;
 import com.vivek.weather.ui.main.model.ForecastWeather;
 
 import java.util.ArrayList;

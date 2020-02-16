@@ -7,6 +7,7 @@ public class Constants {
     public static int NO_OF_DAYS_FORECAST = 7;
     public static final String LATLONG_ERROR = "400";
     public static final String API_KEY_ERROR = "401";
+    public static final int GPS_REQUEST = 1001;
 
     //Current temperature
 //    http://api.openweathermap.org/data/2.5/weather?q=Bangalore&appid=b449b024cea38b4f5b1f8dc0fd043ad4&units=metric

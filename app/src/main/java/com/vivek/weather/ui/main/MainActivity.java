@@ -1,11 +1,8 @@
 package com.vivek.weather.ui.main;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.vivek.weather.R;
@@ -16,22 +13,15 @@ import dagger.android.support.DaggerAppCompatActivity;
 public class MainActivity extends DaggerAppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    /*@Inject
-    AirLocation airLocation;
-
-    @Inject
-    AirlocationCallback airlocationCallback;*/
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
         hideStatusBar();
-
+        binding.backButton.setOnClickListener(view -> {
+            finish();
+        });
     }
-
-
 
     private void hideStatusBar() {
         View decorView = getWindow().getDecorView();
@@ -43,5 +33,9 @@ public class MainActivity extends DaggerAppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
+
+
+
 
 }

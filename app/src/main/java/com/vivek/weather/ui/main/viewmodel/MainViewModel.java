@@ -1,7 +1,6 @@
 package com.vivek.weather.ui.main.viewmodel;
 
 import android.location.Location;
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -48,7 +47,7 @@ public class MainViewModel extends ViewModel {
         forecastWeatherList = new ArrayList<>();
     }
 
-    private void getCurrentTempData(String lat, String lon) {  //TODO- from location services
+    private void getCurrentTempData(String lat, String lon) {
         mainWebApi.getCurrentWeather(lat, lon, BuildConfig.API_KEY
                 , "metric").enqueue(new Callback<WeatherData>() {
             @Override
@@ -91,12 +90,12 @@ public class MainViewModel extends ViewModel {
             String lat = String.valueOf(location.getLatitude());
             String lon = String.valueOf(location.getLongitude());
             getCurrentTempData(lat, lon);
-            getForecastTempData();
+            getForecastTempData(lat, lon);
         }
     }
 
-    private void getForecastTempData() {  //TODO- from location services
-        mainWebApi.getWeatherForecast("12.9762", "77.6033", NO_OF_DAYS_FORECAST,
+    private void getForecastTempData(String lat, String lon) {
+        mainWebApi.getWeatherForecast(lat, lon, NO_OF_DAYS_FORECAST,
                 BuildConfig.API_KEY, "metric").enqueue(new Callback<WeatherForecast>() {
             @Override
             public void onResponse(Call<WeatherForecast> call, Response<WeatherForecast> response) {
@@ -115,8 +114,8 @@ public class MainViewModel extends ViewModel {
                         forecastWeatherList.add(forecastWeather);
                     }
                     forecastWeatherLiveData.setValue(forecastWeatherList);
-//                    errorThrowable.setValue(null);
-//                    errorCode.setValue("");
+                    errorThrowable.setValue(null);
+                    errorCode.setValue("");
                 } else {
                     errorCode.setValue(new ApiError().errorCode(response));
                 }
@@ -124,7 +123,7 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<WeatherForecast> call, Throwable t) {
-                Log.e(TAG, "onFailure: " + t.getMessage());
+                errorThrowable.setValue(t);
             }
         });
     }

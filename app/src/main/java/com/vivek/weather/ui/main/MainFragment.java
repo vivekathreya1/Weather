@@ -2,12 +2,10 @@ package com.vivek.weather.ui.main;
 
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
@@ -25,8 +23,6 @@ import com.vivek.weather.ui.main.viewmodel.MainViewModel;
 
 import javax.inject.Inject;
 
-import mumayank.com.airlocationlibrary.AirLocation;
-
 import static com.vivek.weather.utils.Constants.API_KEY_ERROR;
 import static com.vivek.weather.utils.Constants.LATLONG_ERROR;
 
@@ -36,6 +32,7 @@ public class MainFragment extends BaseFragment {
     private MainViewModel mViewModel;
     private MainFragmentBinding binding;
     private View rootView;
+
 
     @Inject
     ViewModelProviderFactory providerFactory;
@@ -49,11 +46,6 @@ public class MainFragment extends BaseFragment {
         return new MainFragment();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getLocation();
-    }
 
     @Nullable
     @Override
@@ -82,6 +74,12 @@ public class MainFragment extends BaseFragment {
         binding.retryBut.setOnClickListener((view -> {
             binding.progressCircular.setVisibility(View.VISIBLE);
             mViewModel.getData(location);
+        }));
+
+        binding.turnOnBut.setOnClickListener((view -> {
+            binding.progressCircular.setVisibility(View.VISIBLE);
+            getPermissions();
+
         }));
 
         binding.slideUpArrow.setOnClickListener(view -> {
@@ -127,6 +125,7 @@ public class MainFragment extends BaseFragment {
             binding.progressCircular.setVisibility(View.INVISIBLE);
             if (throwable instanceof NoConnectivityException) {
                 setErrorVisibility(getString(R.string.no_internet), View.VISIBLE);
+
             } else if (throwable == null) {
                 setErrorVisibility("", View.INVISIBLE);
             } else if (throwable != null) {
@@ -155,6 +154,17 @@ public class MainFragment extends BaseFragment {
         binding.errorTv.setText(msg);
         binding.errorTv.setVisibility(visibility);
         binding.retryBut.setVisibility(visibility);
+        binding.turnOnBut.setVisibility(View.GONE);
+        if (visibility == View.VISIBLE) {
+            binding.currentTempMax.setVisibility(View.GONE);
+            binding.currentTempMin.setVisibility(View.GONE);
+            binding.slideUpDown.setVisibility(View.GONE);
+            binding.slideUpArrow.setVisibility(View.GONE);
+        } else {
+            binding.currentTempMax.setVisibility(View.VISIBLE);
+            binding.currentTempMin.setVisibility(View.VISIBLE);
+            binding.slideUpArrow.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -166,8 +176,13 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
-    public void setLocationError(AirLocation.LocationFailedEnum locationFailedEnum) {
-        Log.e(TAG, "setLocationError: " + locationFailedEnum);
+    public void setLocationError() {
+        mViewModel.getErrorThrowable().setValue(new Throwable());
+        binding.errorTv.setText(R.string.location_permission_denied);
+        binding.progressCircular.setVisibility(View.GONE);
+        binding.retryBut.setVisibility(View.GONE);
+        binding.turnOnBut.setVisibility(View.VISIBLE);
+
     }
 
     private void initRecyclerview() {

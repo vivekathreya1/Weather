@@ -5,6 +5,7 @@
     <string name="app_name">&appname;</string>
     <string name="no_internet">No internet connection. Please check your network connection and try again.</string>
     <string name="unknown_error">Unknown error occured. Please try again later.</string>
+    <string name="location_permission_denied">&appname; app requires location access. Please provide access and try again later.</string>
     <string name="space">\u0020</string>
     <string name="celcius">\u00B0</string>
     <string name="min">Min: %s\u00B0 C </string>
@@ -12,4 +13,9 @@
     <string name="retry">Retry</string>
     <string name="latlongError">An error ocurred while fetching the location</string>
     <string name="apikeyError">Invalid key</string>
+    <string name="location_perm_rationale">&appname; needs your location information</string>
+    <string name="location_perm_Heading">Turn on location mode</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="turn_on">Turn on</string>
 </resources>
