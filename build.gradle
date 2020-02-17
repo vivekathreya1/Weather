@@ -40,4 +40,6 @@ ext {
     gson_version = "2.8.6"
     dagger_version = "2.25.4"
     retrofitVersion = "2.7.1"
+    fragment_version = "1.2.0"
+
 }

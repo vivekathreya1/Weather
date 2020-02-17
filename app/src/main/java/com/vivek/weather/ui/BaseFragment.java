@@ -2,13 +2,12 @@ package com.vivek.weather.ui;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -19,20 +18,20 @@ import com.vivek.weather.R;
 import com.vivek.weather.permissions.LocationPermissionListener;
 import com.vivek.weather.permissions.MyErrorListener;
 import com.vivek.weather.permissions.PermissionUtils;
-import com.vivek.weather.utils.Constants;
 import com.vivek.weather.utils.CustomAlertDialogListener;
 import com.vivek.weather.utils.UiUtils;
 
 import dagger.android.support.DaggerFragment;
 import mumayank.com.airlocationlibrary.AirLocation;
 
-public abstract class BaseFragment extends DaggerFragment implements CustomAlertDialogListener, LocationListener {
+public abstract class BaseFragment extends DaggerFragment implements CustomAlertDialogListener {
 
     private static final String TAG = "BaseFragment";
 
     private PermissionListener locationPermissionListener;
     private PermissionRequestErrorListener permissionRequestErrorListener;
     private PermissionToken permissionToken;
+    private AirLocation airLocation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public abstract class BaseFragment extends DaggerFragment implements CustomAlert
     }
 
     private void getLocation(){
-        new AirLocation(getActivity(), true, true, new AirLocation.Callbacks() {
+        airLocation = new AirLocation(getActivity(), true, true, new AirLocation.Callbacks() {
             @Override
             public void onSuccess(Location location) {
                 setLocation(location);
@@ -66,6 +65,8 @@ public abstract class BaseFragment extends DaggerFragment implements CustomAlert
                 setLocationError();
             }
         });
+
+
     }
 
 
@@ -81,15 +82,16 @@ public abstract class BaseFragment extends DaggerFragment implements CustomAlert
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == Constants.GPS_REQUEST) {
-//                splashViewModel.requestLocation();
-            }
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-//            gotoMainActivity( setErrorLocation());
-        }
+        airLocation.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
     }
 
     @Override
@@ -102,20 +104,6 @@ public abstract class BaseFragment extends DaggerFragment implements CustomAlert
         permissionToken.cancelPermissionRequest();
     }
 
-    @Override
-    public void onProviderEnabled(String s) {
-    }
 
-    @Override
-    public void onProviderDisabled(String s) {
 
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-    }
 }

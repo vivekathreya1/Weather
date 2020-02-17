@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="forecast_row_layout_padding">10dp</dimen>
+    <dimen name="forecast_date_margin_top">8dp</dimen>
+    <dimen name="forecast_date_textsize">12sp</dimen>
+    <dimen name="forecast_day_textsize">18sp</dimen>
+    <dimen name="card_view_title_size">16sp</dimen>
+    <dimen name="back_but_padding">14dp</dimen>
+    <dimen name="city_marginTop">10dp</dimen>
+    <dimen name="city_text_size">25sp</dimen>
+    <dimen name="current_date_text_size">18sp</dimen>
+    <dimen name="current_weather_icon">40dp</dimen>
+    <dimen name="current_description_text_size">20sp</dimen>
+    <dimen name="current_temp_text_size">150sp</dimen>
+    <dimen name="current_temp_min_text_size">30sp</dimen>
+    <dimen name="current_temp_min_margin_end">40dp</dimen>
+
+</resources>

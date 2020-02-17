@@ -80,6 +80,8 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidx_test_espresso"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.androidx_test_espresso"
     implementation "androidx.test.espresso:espresso-idling-resource:$rootProject.androidx_test_espresso"
+    debugImplementation "androidx.fragment:fragment-testing:$rootProject.fragment_version"
+
 
     //Dagger
     implementation "com.google.dagger:dagger:$dagger_version"

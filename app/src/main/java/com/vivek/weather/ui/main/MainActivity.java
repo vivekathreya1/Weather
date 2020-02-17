@@ -1,17 +1,29 @@
 package com.vivek.weather.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.vivek.weather.R;
 import com.vivek.weather.databinding.MainActivityBinding;
 
 import dagger.android.support.DaggerAppCompatActivity;
+import mumayank.com.airlocationlibrary.AirLocation;
 
 public class MainActivity extends DaggerAppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
+    private PermissionListener locationPermissionListener;
+    private PermissionRequestErrorListener permissionRequestErrorListener;
+    private PermissionToken permissionToken;
+    private AirLocation airLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +46,17 @@ public class MainActivity extends DaggerAppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.mainFragment);
+        navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
+    }
 
-
-
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.mainFragment);
+        navHostFragment.getChildFragmentManager().getFragments().get(0).onRequestPermissionsResult(requestCode,  permissions, grantResults);
+    }
 }

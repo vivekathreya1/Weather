@@ -78,7 +78,7 @@ public class MainFragment extends BaseFragment {
 
         binding.turnOnBut.setOnClickListener((view -> {
             binding.progressCircular.setVisibility(View.VISIBLE);
-            getPermissions();
+//            getPermissions();
 
         }));
 
